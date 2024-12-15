@@ -43,10 +43,6 @@ class ProjectsController < ApplicationController
   end
 
   def packages
-    @projects = Project.all.select{|p| p.packages.present? }.sort_by{|p| p.packages.sum{|p| p['downloads'] || 0 } }.reverse
-  end
-
-  def images
-    @projects = Project.all.with_readme.select{|p| p.readme_image_urls.present? }
+    @projects = Project.all.select{|p| p.packages.present? }.sort_by{|p| p.packages.sum{|p| p['downloads'] || 0 } }.select{|p| p.packages.sum{|p| p['downloads'] || 0 } > 1000}.reverse
   end
 end

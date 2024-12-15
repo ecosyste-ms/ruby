@@ -1,13 +1,13 @@
-<% @meta_title = "Open Sustain Packages" %>
-<% @meta_description = "The most popular packages published from Open Sustain projects" %>
+<% @meta_title = "Ruby Packages" %>
+<% @meta_description = "The most popular packages published from Ruby projects" %>
 
 <div class="container-sm">
   <h1 class='mb-3'>
-    Open Sustain Packages
+    Ruby Packages
   </h1>
   
   <p class='lead'>
-    The most popular packages published from Open Sustain projects.
+    The most popular packages published from Ruby projects.
   </p>
 
   <% @projects.each do |project|%>
@@ -62,6 +62,7 @@
     <h4>Packages</h4>
     <ul>
       <% project.packages.sort_by{|p| p['downloads'] || 0 }.reverse.each do |package| %>
+        <% next unless package['downloads'] && package['downloads'] > 1000 %>
         <li>
           <%= package['registry']['name'] %>: <%= link_to package['name'], package['registry_url'] %>
           <% if package['downloads']%>

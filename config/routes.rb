@@ -15,17 +15,12 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do
-      resources :issues do
-        collection do
-          get :openclimateaction
-        end
-      end
+      resources :issues 
       resources :jobs
       resources :projects, constraints: { id: /.*/ }, only: [:index, :show] do
         collection do
           get :lookup
           get :packages
-          get :images
         end
         member do
           get :ping
@@ -40,7 +35,6 @@ Rails.application.routes.draw do
       get :lookup
       get :dependencies
       get :packages
-      get :images
     end
     resources :releases, only: [:index, :show]
   end

@@ -112,21 +112,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Project'
-  /projects/images:
-    get:
-      description: get projects with images
-      operationId: getProjectImages
-      tags:
-        - projects
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Project'
   /issues:
     get:
       description: get issues
