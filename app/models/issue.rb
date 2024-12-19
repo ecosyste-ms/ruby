@@ -1,7 +1,7 @@
 class Issue < ApplicationRecord
   belongs_to :project
 
-  CLIMATETRIAGE_LABELS = [":beginner: good first issue",
+  HELP_WANTED_LABELS = [":beginner: good first issue",
   ":open_hands: help wanted",
   "Good First Issue",
   "Good as first PR",
@@ -37,7 +37,6 @@ class Issue < ApplicationRecord
   "help-wanted",
   "i-good-first-issue",
   "issue type: good first issue",
-  "open climate action",
   "question & help wanted",
   "status --- good first issue",
   "status --- help wanted :heart:",
