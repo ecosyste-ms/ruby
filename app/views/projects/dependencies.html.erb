@@ -66,23 +66,6 @@
           <% end %>
         </ul>
       </div>
-
-      <div class="card mb-3 d-flex">
-        <div class="card-header">
-          Most popular package managers by package count
-        </div>
-        <ul class="list-group list-group-flush">
-          <% Dependency.group(:ecosystem).count.sort_by{|k,v| v}.reverse.each do |ecosystem, count| %>
-            <li class="list-group-item">
-              <%= ecosystem %>
-              <small class='ps-3 text-muted'>
-                <i><%= pluralize count, 'project' %></i>
-              </small>
-            </li>  
-          <% end %>
-        </ul>
-      </div>
-
       
     </div>
 </div>
