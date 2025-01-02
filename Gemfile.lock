@@ -94,8 +94,12 @@ GEM
       language_list (~> 1.2.1)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    commonmarker (2.0.1)
+    commonmarker (2.0.2)
       rb_sys (~> 0.9)
+    commonmarker (2.0.2-aarch64-linux)
+    commonmarker (2.0.2-arm64-darwin)
+    commonmarker (2.0.2-x86_64-darwin)
+    commonmarker (2.0.2-x86_64-linux)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     counter_culture (3.8.2)
@@ -362,7 +366,7 @@ DEPENDENCIES
   bootsnap
   bootstrap
   cff
-  commonmarker (= 2.0.1)
+  commonmarker (= 2.0.2)
   counter_culture
   csv
   dalli
@@ -427,7 +431,11 @@ CHECKSUMS
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   cff (1.3.0) sha256=d2b65d57160040ad244087d65b89769558a40aafb34b13d048e0ea72bc521316
   chronic_duration (0.10.6) sha256=fac58d4147d3183a40811400380cafcef049f2bb02421d2fd1c6e685fbe8facc
-  commonmarker (2.0.1) sha256=1a78f97226a5c3113847fd2e21469dd0927dc6f333c088b81c8f960129b1c6c5
+  commonmarker (2.0.2) sha256=e422b467625feb002c4e6e1d328474c8fb9b92d19345edd11e028d481f16d059
+  commonmarker (2.0.2-aarch64-linux) sha256=c722053d5fef7c07680d140266fdadee1dc7da6f180f8a5a886e584419f8517e
+  commonmarker (2.0.2-arm64-darwin) sha256=90dff6260f1bf8b4078ff539b4afa527ec50ff6c1619cad86761874b3b10f711
+  commonmarker (2.0.2-x86_64-darwin) sha256=29191f9d4a892ed1c5b7176790494ae68f6af108645da8065475978994a35f67
+  commonmarker (2.0.2-x86_64-linux) sha256=a466bdbba8240a107c648040cec596498ae77929271fc08faf81086bd2275a61
   concurrent-ruby (1.3.4) sha256=d4aa926339b0a86b5b5054a0a8c580163e6f5dcbdfd0f4bb916b1a2570731c32
   connection_pool (2.4.1) sha256=0f40cf997091f1f04ff66da67eabd61a9fe0d4928b9a3645228532512fab62f4
   counter_culture (3.8.2) sha256=24d038740fc9e5546cda2b8a17e83e7778ab73bcc959b7a3bd807e4cf6250072
