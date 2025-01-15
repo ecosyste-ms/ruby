@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     tzdata \
     curl \
+    libyaml-dev \
     libcurl4-openssl-dev \
  && rm -rf /var/lib/apt/lists/*
 
