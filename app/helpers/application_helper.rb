@@ -6,7 +6,15 @@ module ApplicationHelper
   end
 
   def meta_description
-    @meta_description || 'A summary of data about the Ruby ecosystem.'
+    @meta_description || app_description
+  end
+
+  def app_name
+    "Ruby"
+  end
+
+  def app_description
+    'A summary of data about the Ruby ecosystem.'
   end
 
   def obfustcate_email(email)
