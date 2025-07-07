@@ -7,12 +7,7 @@ class Dependency < ApplicationRecord
       
     puts "  Fetching #{purl}"
     
-    conn = Faraday.new(url: purl) do |faraday|
-      faraday.response :follow_redirects
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
+    response = EcosystemsApiClient.get(purl)
     puts "  Response: #{response.status}"
     return unless response.success?
     packages = JSON.parse(response.body)

@@ -66,7 +66,7 @@ class Collection < ApplicationRecord
   end
 
   def import_keyword(keyword)
-    resp = Faraday.get("https://packages.ecosyste.ms/api/v1/keywords/#{keyword}?per_page=1000")
+    resp = EcosystemsApiClient.get("https://packages.ecosyste.ms/api/v1/keywords/#{keyword}?per_page=1000")
     if resp.status == 200
       data = JSON.parse(resp.body)
       urls = data['packages'].reject{|p| p['status'].present? }.map{|p| p['repository_url'] }.uniq.reject(&:blank?)
@@ -79,7 +79,7 @@ class Collection < ApplicationRecord
   end
 
   def import_topic(topic)
-    resp = Faraday.get("https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=1000")
+    resp = EcosystemsApiClient.get("https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=1000")
     if resp.status == 200
       data = JSON.parse(resp.body)
       urls = data['repositories'].map{|p| p['html_url'] }.uniq.reject(&:blank?)
@@ -92,7 +92,7 @@ class Collection < ApplicationRecord
   end
 
   def import_org(host, org)
-    resp = Faraday.get("https://repos.ecosyste.ms/api/v1/hosts/#{host}/owners/#{org}/repositories?per_page=1000")
+    resp = EcosystemsApiClient.get("https://repos.ecosyste.ms/api/v1/hosts/#{host}/owners/#{org}/repositories?per_page=1000")
     if resp.status == 200
       data = JSON.parse(resp.body)
       urls = data.map{|p| p['html_url'] }.uniq.reject(&:blank?)

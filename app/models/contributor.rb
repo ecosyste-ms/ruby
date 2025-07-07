@@ -38,7 +38,7 @@ class Contributor < ApplicationRecord
 
   def ping
     return unless ping_urls
-    Faraday.get(ping_urls)
+    EcosystemsApiClient.get(ping_urls)
   end
 
   def repos_api_url
@@ -53,7 +53,7 @@ class Contributor < ApplicationRecord
   def fetch_profile
     return if repos_api_url.blank?
     
-    response = Faraday.get repos_api_url
+    response = EcosystemsApiClient.get(repos_api_url)
     return unless response.success?
 
     profile = JSON.parse(response.body)
@@ -66,7 +66,7 @@ class Contributor < ApplicationRecord
   def import_repos
     return if repos_api_url.blank?
 
-    response = Faraday.get("#{repos_api_url}/repositories?per_page=1000")
+    response = EcosystemsApiClient.get("#{repos_api_url}/repositories?per_page=1000")
     return unless response.success?
 
     repos = JSON.parse(response.body)
