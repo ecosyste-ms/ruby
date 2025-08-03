@@ -4,7 +4,8 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @scope = Project.all
+    # Optimize: Only select fields needed for the index view
+    @scope = Project.select(:id, :url, :name, :description, :keywords, :last_synced_at, :score, :repository)
 
     if params[:keyword].present?
       @scope = @scope.keyword(params[:keyword])
