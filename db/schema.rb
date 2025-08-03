@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_09_122300) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_153513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -35,6 +35,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_122300) do
     t.integer "project_ids", default: [], array: true
     t.integer "projects_count"
     t.json "profile", default: {}
+    t.index ["email"], name: "index_contributors_on_email"
+    t.index ["project_ids"], name: "index_contributors_on_project_ids", using: :gin
+    t.index ["topics"], name: "index_contributors_on_topics", using: :gin
   end
 
   create_table "dependencies", force: :cascade do |t|
@@ -47,6 +50,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_122300) do
     t.float "average_ranking"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["count"], name: "index_dependencies_on_count"
+    t.index ["ecosystem", "name"], name: "index_dependencies_on_ecosystem_and_name", unique: true
+    t.index ["project_id"], name: "index_dependencies_on_project_id"
   end
 
   create_table "issues", force: :cascade do |t|
@@ -102,7 +108,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_122300) do
     t.text "readme"
     t.json "works", default: {}
     t.string "keywords_from_contributors", default: [], array: true
+    t.index "((repository ->> 'archived'::text))", name: "index_projects_on_repository_archived"
+    t.index "((repository ->> 'language'::text))", name: "index_projects_on_repository_language"
+    t.index "((repository ->> 'owner'::text))", name: "index_projects_on_repository_owner"
     t.index ["collection_id"], name: "index_projects_on_collection_id"
+    t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
+    t.index ["last_synced_at"], name: "index_projects_on_last_synced_at"
+    t.index ["matching_criteria"], name: "index_projects_on_matching_criteria"
     t.index ["url"], name: "index_projects_on_url", unique: true
   end
 
@@ -123,5 +135,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_122300) do
     t.string "html_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_releases_on_project_id"
   end
 end
