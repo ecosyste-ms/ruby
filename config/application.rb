@@ -21,5 +21,10 @@ module Ruby
     # 
     config.exceptions_app = self.routes
     config.active_support.to_time_preserves_timezone = :zone
+    
+    # Stats middleware for tracking requests (API endpoints only)
+    api_filter = ->(path) { path.start_with?('/api/') }
+    config.middleware.use Stats::Middleware::IpTracker, redis: Redis.new, path_filter: api_filter
+    config.middleware.use Stats::Middleware::UserAgentTracker, redis: Redis.new, path_filter: api_filter
   end
 end
