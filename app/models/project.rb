@@ -822,13 +822,13 @@ class Project < ApplicationRecord
   end 
 
   def commiter_domains
-    return unless commits.present?
-    return unless commits['committers'].present?
-    
+    return [] unless commits.present?
+    return [] unless commits['committers'].present?
+
     # Cache expensive domain processing
     Rails.cache.fetch("project_#{id}_committer_domains", expires_in: 1.day) do
       commits['committers'].map{|c| c['email'].split('@')[1].try(:downcase) }.reject{|e| e.nil? || ignored_domains.include?(e) || e.ends_with?('.local') || e.split('.').length ==1  }.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
-    end
+    end || []
   end
 
   def ignored_domains
