@@ -16,3 +16,4 @@ coverage/
 
 data/
 .ruby-lsp
+*.dump
