@@ -47,7 +47,7 @@ gem 'stats-middleware'
 gem 'commonmarker'
 gem 'ostruct'
 gem 'dalli'
-gem "connection_pool", "<3"
+gem "connection_pool", "<4"
 
 group :development, :test do
   gem 'dotenv-rails'
