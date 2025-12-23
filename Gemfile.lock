@@ -296,7 +296,7 @@ GEM
       rack (>= 2.0)
       redis (>= 4.0)
     stemmify (0.0.2)
-    stringio (3.1.9)
+    stringio (3.2.0)
     thor (1.4.0)
     tilt (2.6.1)
     timeout (0.5.0)
@@ -515,7 +515,7 @@ CHECKSUMS
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
   stats-middleware (0.1.0) sha256=33da5964467523d676f957b5fc0e32d670dff2524084fc3181b148646884cbe3
   stemmify (0.0.2) sha256=81d529fde51aa206ebbf61f6a142fc41882a1259e1e0f7f783cf6b8ef6aafbc9
-  stringio (3.1.9) sha256=c111af13d3a73eab96a3bc2655ecf93788d13d28cb8e25c1dcbff89ace885121
+  stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
   timeout (0.5.0) sha256=852aefd13f41d84c2d0d83099b275034c6517395884b58e635acc8847c9190cb
