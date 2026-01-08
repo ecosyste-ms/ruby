@@ -6,6 +6,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,7 +26,6 @@ module Ruby
     # config.eager_load_paths << Rails.root.join("extras")
     # 
     config.exceptions_app = self.routes
-    config.active_support.to_time_preserves_timezone = :zone
     
     # Stats middleware for tracking requests (API endpoints only)
     api_filter = ->(path) { path.start_with?('/api/') }
