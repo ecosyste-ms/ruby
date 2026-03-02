@@ -1,4 +1,13 @@
 class Issue < ApplicationRecord
+  def self.sortable_columns
+    {
+      'issues.created_at' => 'issues.created_at',
+      'issues.updated_at' => 'issues.updated_at',
+      'created_at' => 'issues.created_at',
+      'updated_at' => 'issues.updated_at',
+    }
+  end
+
   belongs_to :project
 
   HELP_WANTED_LABELS = [":beginner: good first issue",
