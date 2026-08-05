@@ -12,4 +12,37 @@ class ProjectTest < ActiveSupport::TestCase
     repo_url = project.repository_url
     assert_equal 'https://github.com/foo/bar', repo_url
   end
+
+  test "sync_releases ignores unknown attributes from api" do
+    releases_url = 'https://repos.ecosyste.ms/api/v1/hosts/GitHub/repositories/user/project/releases'
+    project = create(:project)
+    project.repository['releases_url'] = releases_url
+
+    payload = [{
+      'uuid' => 'abc-123',
+      'tag_name' => 'v1.0.0',
+      'name' => 'v1.0.0',
+      'body' => 'notes',
+      'draft' => false,
+      'prerelease' => false,
+      'published_at' => '2026-01-01T00:00:00Z',
+      'author' => 'someone',
+      'assets' => [],
+      'target_commitish' => 'main',
+      'tag_url' => 'https://example.com/tag',
+      'html_url' => 'https://example.com/release',
+      'last_synced_at' => '2026-01-01T00:00:00Z',
+      'release_url' => 'https://example.com/api/release',
+      'immutable' => true
+    }]
+
+    stub_request(:get, "#{releases_url}?per_page=1000")
+      .to_return(status: 200, body: payload.to_json)
+
+    assert_difference 'project.releases.count', 1 do
+      project.sync_releases
+    end
+
+    assert_equal 'v1.0.0', project.releases.first.tag_name
+  end
 end

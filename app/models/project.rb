@@ -1077,7 +1077,7 @@ class Project < ApplicationRecord
 
     releases.each do |release|
       r = Release.find_or_create_by(project_id: id, uuid: release['uuid'])
-      r.update(release.except('release_url'))
+      r.update(release.except('release_url', 'immutable'))
     end
   end
 end
