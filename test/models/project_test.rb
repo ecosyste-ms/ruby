@@ -13,9 +13,10 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal 'https://github.com/foo/bar', repo_url
   end
 
-  test "sync_releases ignores unknown attributes from api" do
+  test "sync_releases ignores unknown and locally managed attributes" do
     releases_url = 'https://repos.ecosyste.ms/api/v1/hosts/GitHub/repositories/user/project/releases'
     project = create(:project)
+    other_project = create(:project)
     project.repository['releases_url'] = releases_url
 
     payload = [{
@@ -33,7 +34,8 @@ class ProjectTest < ActiveSupport::TestCase
       'html_url' => 'https://example.com/release',
       'last_synced_at' => '2026-01-01T00:00:00Z',
       'release_url' => 'https://example.com/api/release',
-      'immutable' => true
+      'immutable' => true,
+      'project_id' => other_project.id
     }]
 
     stub_request(:get, "#{releases_url}?per_page=1000")
@@ -43,6 +45,8 @@ class ProjectTest < ActiveSupport::TestCase
       project.sync_releases
     end
 
-    assert_equal 'v1.0.0', project.releases.first.tag_name
+    release = project.releases.first
+    assert_equal 'v1.0.0', release.tag_name
+    assert_equal project.id, release.project_id
   end
 end
