@@ -43,7 +43,7 @@ class Contributor < ApplicationRecord
 
   def repos_api_url
     return nil if login.blank?
-    "https://repos.ecosyste.ms/api/v1/hosts/Github/owners/#{login}"
+    "https://repos.ecosyste.ms/api/v1/hosts/GitHub/owners/#{login}"
   end
 
   def ping_urls
