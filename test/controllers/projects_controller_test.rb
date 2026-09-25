@@ -71,11 +71,20 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
       should "sort by score" do
         get projects_path(sort: "score", order: "desc")
-        
+
         assert_response :success
         projects = assigns(:projects)
         scores = projects.limit(3).pluck(:score)
         assert_equal scores, scores.sort.reverse
+      end
+
+      should "ignore sort values not in the allowlist" do
+        get projects_path(sort: "(SELECT 1 FROM secrets)", order: "asc")
+
+        assert_response :success
+        sql = assigns(:scope).to_sql
+        refute_includes sql, 'secrets'
+        assert_includes sql, 'ORDER BY last_synced_at ASC'
       end
     end
 

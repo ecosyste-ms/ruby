@@ -8,6 +8,7 @@ class Project < ApplicationRecord
       'updated_at' => 'updated_at',
       'created_at' => 'created_at',
       'last_synced_at' => 'last_synced_at',
+      'score' => 'score',
       'name' => 'name',
     }
   end

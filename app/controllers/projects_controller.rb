@@ -20,7 +20,12 @@ class ProjectsController < ApplicationController
     end
 
     if params[:sort]
-      @scope = @scope.order("#{params[:sort]} #{params[:order]}")
+      sort = sanitize_sort(Project.sortable_columns, default: 'last_synced_at')
+      if params[:order] == 'asc'
+        @scope = @scope.order(sort.asc.nulls_last)
+      else
+        @scope = @scope.order(sort.desc.nulls_last)
+      end
     else
       @scope = @scope.order('last_synced_at DESC nulls last')
     end
